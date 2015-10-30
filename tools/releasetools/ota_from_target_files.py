@@ -624,6 +624,17 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     system_progress -= 0.1
   if HasVendorPartition(input_zip):
     system_progress -= 0.1
+    
+  script.Print("************************************************");
+  script.Print("************************************************");
+  script.Print("   /  ]/    |    \|   \ |  |  |/ ___/    |  |  |");
+  script.Print("  /  /|  o  |  _  |    \|  |  (   \_ |  ||  |  |");
+  script.Print(" /  / |     |  |  |  D  |  ~  |\__  ||  ||_   _|");
+  script.Print("/   \_|  _  |  |  |     |___, |/  \ ||  ||     |");
+  script.Print("\     |  |  |  |  |     |     |\    ||  ||  |  |");
+  script.Print(" \____|__|__|__|__|_____|____/  \___|____|__|__|");
+  script.Print("************************************************");
+  script.Print("************************************************");
 
   script.AppendExtra("if is_mounted(\"/data\") then")
   script.ValidateSignatures("data")
