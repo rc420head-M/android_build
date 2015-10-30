@@ -1883,7 +1883,18 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CANDY_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CANDY_TARGET_PACKAGE) > $(CANDY_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(CANDY_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_YLW}"══════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_BLU}"C"${CL_RED}"a"${CL_YLW}"n"${CL_GRN}"d"${CL_BLU}"y"${CL_RED}"S"${CL_YLW}"i"${CL_GRN}"X"${CL_YLW}"*"${CL_RST}
+	@echo -e ${CL_YLW}"══════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_BLU}"                     ██████╗"${CL_RED}" █████╗ "${CL_YLW}"███╗   ██╗"${CL_GRN}"██████╗ "${CL_BLU}"██╗   ██╗                   "${CL_RST}
+	@echo -e ${CL_BLU}"                    ██╔════╝"${CL_RED}"██╔══██╗"${CL_YLW}"████╗  ██║"${CL_GRN}"██╔══██╗"${CL_BLU}"╚██╗ ██╔╝                   "${CL_RST}
+	@echo -e ${CL_BLU}"                    ██║     "${CL_RED}"███████║"${CL_YLW}"██╔██╗ ██║"${CL_GRN}"██║  ██║"${CL_BLU}"  ╚██╔╝╝                    "${CL_RST}
+	@echo -e ${CL_BLU}"                    ██║     "${CL_RED}"██╔══██║"${CL_YLW}"██║╚██╗██║"${CL_GRN}"██║  ██║"${CL_BLU}"   ██║                      "${CL_RST}
+	@echo -e ${CL_BLU}"                    ╚██████╗"${CL_RED}"██║  ██║"${CL_YLW}"██║ ╚████║"${CL_GRN}"██████║║"${CL_BLU}"   ██║                      "${CL_RST}
+	@echo -e ${CL_BLU}"                     ╚═════╝"${CL_RED}"╚═╝  ╚═╝"${CL_YLW}"╚═╝  ╚═══╝"${CL_GRN}" ╚═════╝"${CL_BLU}"   ╚═╝                      "${CL_RST}
+	@echo -e ${CL_YLW}"══════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_CYN}"$(CANDY_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_YLW}"══════════════════════════════════════════════════════════════════════════════════"${CL_RST}
 
 bootzip: bootimage
 	$(BOOT_ZIP_FROM_IMAGE_SCRIPT) \
