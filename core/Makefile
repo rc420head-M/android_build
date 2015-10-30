@@ -1868,7 +1868,17 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CANDY_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CANDY_TARGET_PACKAGE) > $(CANDY_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(CANDY_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_GRN}"Package Complete: $(CUSTOM_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_BLU}"                   ██████╗ █████╗ ███╗   ██╗ ██████╗ ██╗   ██╗                  "${CL_RST}
+	@echo -e ${CL_BLU}"                  ██╔════╝██╔══██╗████╗  ██║ ██╔══██╗╚██╗ ██╔╝                  "${CL_RST}
+	@echo -e ${CL_BLU}"                  ██║     ███████║██╔██╗ ██║ ██║  ██║  ╚██╔╝╝                   "${CL_RST}
+	@echo -e ${CL_BLU}"                  ██║     ██╔══██║██║╚██╗██║ ██║  ██║   ██║                     "${CL_RST}
+	@echo -e ${CL_BLU}"                  ╚██████╗██║  ██║██║ ╚████║ ██████║║   ██║                     "${CL_RST}
+	@echo -e ${CL_BLU}"                   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═════╝   ╚═╝                     "${CL_RST}
+	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
+	@echo -e ${CL_CYN}"Package zip: "${CL_MAG} $(CandySiX_TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_YLW}"════════════════════════════════════════════════════════════════════════════════"${CL_RST}
 
 # -----------------------------------------------------------------
 # The factory package
