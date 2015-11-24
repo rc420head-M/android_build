@@ -10,6 +10,7 @@ ifneq ($(BUILD_WITH_COLORS),0)
   CL_MAG="\033[35m"
   CL_CYN="\033[36m"
   CL_RST="\033[0m"
+  CL_PPL="\033[35;1m"
 endif
 
 # HACK: clear LOCAL_PATH from including last build target before calling
