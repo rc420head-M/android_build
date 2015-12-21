@@ -174,7 +174,7 @@ OPTIONS.cache_size = None
 OPTIONS.stash_threshold = 0.8
 OPTIONS.gen_verify = False
 OPTIONS.log_diff = None
-OPTIONS.backuptool = False
+OPTIONS.backuptool = True
 OPTIONS.override_device = 'auto'
 OPTIONS.override_prop = False
 
@@ -544,12 +544,13 @@ def GetImage(which, tmpdir, info_dict):
 
 
 def CopyInstallTools(output_zip):
-  install_path = os.path.join(OPTIONS.input_tmp, "INSTALL")
-  for root, subdirs, files in os.walk(install_path):
-     for f in files:
-      install_source = os.path.join(root, f)
-      install_target = os.path.join("install", os.path.relpath(root, install_path), f)
-      output_zip.write(install_source, install_target)
+  oldcwd = os.getcwd()
+  os.chdir(os.getenv('OUT'))
+  for root, subdirs, files in os.walk("install"):
+    for f in files:
+      p = os.path.join(root, f)
+      output_zip.write(p, p)
+  os.chdir(oldcwd)
 
 
 def WriteFullOTAPackage(input_zip, output_zip):
@@ -649,6 +650,16 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("Target: %s" % CalculateFingerprint(
       oem_props, oem_dict, OPTIONS.info_dict))
 
+  script.Print("*****************************************");
+  script.Print("*****************************************");
+  script.Print("   ___              _      ___           ");
+  script.Print("  / __|__ _ _ _  __| |_  _| _ \___ _ __  ");
+  script.Print(" | (__/ _` | ' \/ _` | || |   / _ \ '  \ ");
+  script.Print("  \___\__,_|_||_\__,_|\_, |_|_\___/_|_|_|");
+  script.Print("                      |__/               ");
+  script.Print("*****************************************");
+  script.Print("*****************************************");
+
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
@@ -659,6 +670,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   if OPTIONS.backuptool:
     script.Mount("/system")
+    script.Print("Running backup tool...")
     script.RunBackup("backup")
     script.Unmount("/system")
 
@@ -669,17 +681,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if HasVendorPartition(input_zip):
     system_progress -= 0.1
 
-  if not OPTIONS.wipe_user_data:
-    script.AppendExtra("if is_mounted(\"/data\") then")
-    script.ValidateSignatures("data")
-    script.AppendExtra("else")
-    script.Mount("/data")
-    script.ValidateSignatures("data")
-    script.Unmount("/data")
-    script.AppendExtra("endif;")
-
-  # Place a copy of file_contexts.bin into the OTA package which will be used
-  # by the recovery program.
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
@@ -744,15 +745,27 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
-  device_specific.FullOTA_PostValidate()
 
   if OPTIONS.backuptool:
-    script.ShowProgress(0.02, 10)
-    if block_based:
-      script.Mount("/system")
-    script.RunBackup("restore")
-    if block_based:
-      script.Unmount("/system")
+      script.ShowProgress(0.02, 10)
+  if block_based:
+     script.Mount("/system")    	
+     script.Print("Restoring system...")
+     script.RunBackup("restore")  
+  if block_based:
+     script.Unmount("/system")
+
+     script.Print("Flashing SuperSU...")
+  common.ZipWriteStr(output_zip, "supersu/supersu.zip",
+                 ""+input_zip.read("SYSTEM/addon.d/SuperSU.zip"))
+    
+  script.Mount("/system")
+  script.FlashSuperSU()
+  script.Mount("/system")
+  script.RunBackup("restore")
+  
+  if block_based:
+	script.Unmount("/system")
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
