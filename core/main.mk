@@ -211,7 +211,7 @@ ifeq ($(shell echo '$(java_version_str)' | grep '1.8'),)
 requires_openjdk := true
 endif
 endif
-
+endif
 # Check for the current jdk
 ifeq ($(requires_openjdk), true)
 # The user asked for java7 openjdk, so check that the host
